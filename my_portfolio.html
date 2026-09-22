@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ranmaru | ポートフォリオ</title>
+    
+    <!-- Google Fonts: Google Sans & Noto Sans JP -->
+    <!-- ※Google Sansは環境により読み込めない場合があるため、Noto Sans JPをフォールバックとして指定しています -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Material Symbols (Icons) -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+    <style>
+        /* ==========================================================================
+           Material 3 Design Tokens (Light & Dark Mode)
+           ========================================================================== */
+        :root {
+            /* Light Theme Colors (Seed: #6750A4 - Deep Purple) */
+            --md-sys-color-primary: #6750A4;
+            --md-sys-color-on-primary: #FFFFFF;
+            --md-sys-color-primary-container: #EADDFF;
+            --md-sys-color-on-primary-container: #21005D;
+            
+            --md-sys-color-secondary: #625B71;
+            --md-sys-color-on-secondary: #FFFFFF;
+            --md-sys-color-secondary-container: #E8DEF8;
+            --md-sys-color-on-secondary-container: #1D192B;
+            
+            --md-sys-color-tertiary: #7D5260;
+            --md-sys-color-on-tertiary: #FFFFFF;
+            --md-sys-color-tertiary-container: #FFD8E4;
+            --md-sys-color-on-tertiary-container: #31111D;
+            
+            --md-sys-color-error: #B3261E;
+            --md-sys-color-on-error: #FFFFFF;
+            --md-sys-color-error-container: #F9DEDC;
+            --md-sys-color-on-error-container: #410E0B;
+            
+            --md-sys-color-background: #FEF7FF;
+            --md-sys-color-on-background: #1D1B20;
+            
+            --md-sys-color-surface: #FEF7FF;
+            --md-sys-color-on-surface: #1D1B20;
+            --md-sys-color-surface-variant: #E7E0EC;
+            --md-sys-color-on-surface-variant: #49454F;
+            
+            --md-sys-color-outline: #79747E;
+            --md-sys-color-outline-variant: #CAC4D0;
+            
+            --md-sys-color-surface-container-highest: #E6E0E9;
+            --md-sys-color-surface-container-high: #ECE6F0;
+            --md-sys-color-surface-container: #F3EDF7;
+            --md-sys-color-surface-container-low: #F7F2FA;
+            --md-sys-color-surface-container-lowest: #FFFFFF;
+
+            /* Typography */
+            --md-sys-typescale-font-family: 'Google Sans', 'Noto Sans JP', sans-serif;
+            
+            /* Shapes */
+            --md-sys-shape-corner-none: 0px;
+            --md-sys-shape-corner-extra-small: 4px;
+            --md-sys-shape-corner-small: 8px;
+            --md-sys-shape-corner-medium: 12px;
+            --md-sys-shape-corner-large: 16px;
+            --md-sys-shape-corner-extra-large: 28px;
+            --md-sys-shape-corner-full: 9999px;
+
+            /* Elevation */
+            --md-sys-elevation-1: 0 1px 2px 0 rgba(0, 0, 0, 0.3), 0 1px 3px 1px rgba(0, 0, 0, 0.15);
+            --md-sys-elevation-2: 0 1px 2px 0 rgba(0, 0, 0, 0.3), 0 2px 6px 2px rgba(0, 0, 0, 0.15);
+            --md-sys-elevation-3: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 4px 8px 3px rgba(0, 0, 0, 0.15);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --md-sys-color-primary: #D0BCFF;
+                --md-sys-color-on-primary: #381E72;
+                --md-sys-color-primary-container: #4F378B;
+                --md-sys-color-on-primary-container: #EADDFF;
+                
+                --md-sys-color-secondary: #CCC2DC;
+                --md-sys-color-on-secondary: #332D41;
+                --md-sys-color-secondary-container: #4A4458;
+                --md-sys-color-on-secondary-container: #E8DEF8;
+                
+                --md-sys-color-tertiary: #EFB8C8;
+                --md-sys-color-on-tertiary: #492532;
+                --md-sys-color-tertiary-container: #633B48;
+                --md-sys-color-on-tertiary-container: #FFD8E4;
+                
+                --md-sys-color-background: #141218;
+                --md-sys-color-on-background: #E6E0E9;
+                
+                --md-sys-color-surface: #141218;
+                --md-sys-color-on-surface: #E6E0E9;
+                --md-sys-color-surface-variant: #49454F;
+                --md-sys-color-on-surface-variant: #CAC4D0;
+                
+                --md-sys-color-outline: #938F99;
+                --md-sys-color-outline-variant: #49454F;
+                
+                --md-sys-color-surface-container-highest: #36343B;
+                --md-sys-color-surface-container-high: #2B2930;
+                --md-sys-color-surface-container: #211F26;
+                --md-sys-color-surface-container-low: #1D1B20;
+                --md-sys-color-surface-container-lowest: #0F0D13;
+            }
+        }
+
+        /* ==========================================================================
+           Base Styles & Typography
+           ========================================================================== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--md-sys-typescale-font-family);
+            background-color: var(--md-sys-color-background);
+            color: var(--md-sys-color-on-background);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* Material 3 Typography Scale */
+        .display-large { font-size: 57px; line-height: 64px; letter-spacing: -0.25px; font-weight: 400; }
+        .display-medium { font-size: 45px; line-height: 52px; font-weight: 400; }
+        .headline-large { font-size: 32px; line-height: 40px; font-weight: 400; }
+        .headline-medium { font-size: 28px; line-height: 36px; font-weight: 400; }
+        .title-large { font-size: 22px; line-height: 28px; font-weight: 500; }
+        .title-medium { font-size: 16px; line-height: 24px; font-weight: 500; letter-spacing: 0.15px; }
+        .body-large { font-size: 16px; line-height: 24px; font-weight: 400; letter-spacing: 0.5px; }
+        .body-medium { font-size: 14px; line-height: 20px; font-weight: 400; letter-spacing: 0.25px; }
+        .label-large { font-size: 14px; line-height: 20px; font-weight: 500; letter-spacing: 0.1px; }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        section {
+            padding: 96px 0;
+        }
+
+        /* ==========================================================================
+           Material 3 Components
+           ========================================================================== */
+        
+        /* App Bar (Top Navigation) */
+        .m3-app-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 64px;
+            background-color: var(--md-sys-color-surface);
+            color: var(--md-sys-color-on-surface);
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            z-index: 100;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+        .m3-app-bar.scrolled {
+            background-color: var(--md-sys-color-surface-container);
+            box-shadow: var(--md-sys-elevation-2);
+        }
+        .m3-app-bar-title {
+            flex-grow: 1;
+            font-size: 22px;
+            font-weight: 500;
+        }
+        .m3-app-bar-nav {
+            display: flex;
+            gap: 8px;
+        }
+
+        /* Buttons */
+        .m3-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 40px;
+            padding: 0 24px;
+            border-radius: var(--md-sys-shape-corner-full);
+            font-family: var(--md-sys-typescale-font-family);
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.1px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+            text-decoration: none;
+            gap: 8px;
+        }
+        .m3-button:hover { opacity: 0.9; box-shadow: var(--md-sys-elevation-1); }
+        .m3-button:active { opacity: 1; box-shadow: none; }
+        
+        .m3-button-filled {
+            background-color: var(--md-sys-color-primary);
+            color: var(--md-sys-color-on-primary);
+        }
+        .m3-button-tonal {
+            background-color: var(--md-sys-color-secondary-container);
+            color: var(--md-sys-color-on-secondary-container);
+        }
+        .m3-button-outlined {
+            background-color: transparent;
+            border: 1px solid var(--md-sys-color-outline);
+            color: var(--md-sys-color-primary);
+        }
+        .m3-button-text {
+            background-color: transparent;
+            color: var(--md-sys-color-on-surface-variant);
+            padding: 0 12px;
+        }
+        .m3-button-text:hover {
+            background-color: var(--md-sys-color-surface-variant);
+            box-shadow: none;
+        }
+
+        /* IconButton */
+        .m3-icon-button {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            border: none;
+            color: var(--md-sys-color-on-surface-variant);
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .m3-icon-button:hover { background-color: var(--md-sys-color-surface-variant); }
+
+        /* Cards */
+        .m3-card {
+            border-radius: var(--md-sys-shape-corner-large);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .m3-card-filled {
+            background-color: var(--md-sys-color-surface-container-highest);
+            color: var(--md-sys-color-on-surface);
+        }
+        .m3-card-elevated {
+            background-color: var(--md-sys-color-surface-container-low);
+            box-shadow: var(--md-sys-elevation-1);
+            color: var(--md-sys-color-on-surface);
+        }
+        .m3-card-elevated:hover {
+            box-shadow: var(--md-sys-elevation-2);
+            transform: translateY(-2px);
+        }
+        .m3-card-outlined {
+            background-color: var(--md-sys-color-surface);
+            border: 1px solid var(--md-sys-color-outline-variant);
+            color: var(--md-sys-color-on-surface);
+        }
+
+        /* Chips */
+        .m3-chip-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .m3-chip {
+            display: inline-flex;
+            align-items: center;
+            height: 32px;
+            padding: 0 16px;
+            border-radius: var(--md-sys-shape-corner-small);
+            border: 1px solid var(--md-sys-color-outline);
+            background-color: transparent;
+            color: var(--md-sys-color-on-surface-variant);
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .m3-chip-filled {
+            border: none;
+            background-color: var(--md-sys-color-secondary-container);
+            color: var(--md-sys-color-on-secondary-container);
+        }
+
+        /* Text Field (Input) */
+        .m3-text-field {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            margin-bottom: 16px;
+            position: relative;
+        }
+        .m3-text-field label {
+            font-size: 12px;
+            color: var(--md-sys-color-on-surface-variant);
+            margin-left: 16px;
+        }
+        .m3-input {
+            width: 100%;
+            padding: 16px;
+            background-color: var(--md-sys-color-surface-container-high);
+            border: none;
+            border-bottom: 1px solid var(--md-sys-color-on-surface-variant);
+            border-radius: var(--md-sys-shape-corner-extra-small) var(--md-sys-shape-corner-extra-small) 0 0;
+            color: var(--md-sys-color-on-surface);
+            font-family: inherit;
+            font-size: 16px;
+            transition: background-color 0.2s, border-bottom-color 0.2s;
+        }
+        .m3-input:focus {
+            outline: none;
+            background-color: var(--md-sys-color-surface-container-highest);
+            border-bottom: 2px solid var(--md-sys-color-primary);
+        }
+
+        /* ==========================================================================
+           Layout & Section Styles
+           ========================================================================== */
+        
+        /* Hero Section (Expressive) */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--md-sys-color-surface), var(--md-sys-color-primary-container));
+        }
+        
+        /* Expressive Shape decoration */
+        .hero-shape {
+            position: absolute;
+            width: 60vw;
+            height: 60vw;
+            background-color: var(--md-sys-color-tertiary-container);
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+            filter: blur(80px);
+            opacity: 0.5;
+            top: -10%;
+            right: -10%;
+            z-index: 0;
+            animation: shapeMorph 15s ease-in-out infinite alternate;
+        }
+
+        @keyframes shapeMorph {
+            0% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; transform: rotate(0deg); }
+            100% { border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%; transform: rotate(45deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            max-width: 800px;
+        }
+
+        .expressive-title {
+            font-size: clamp(48px, 8vw, 80px); /* Expressive dynamic sizing */
+            line-height: 1.1;
+            font-weight: 700;
+            color: var(--md-sys-color-on-surface);
+            letter-spacing: -1px;
+        }
+        .expressive-title span {
+            color: var(--md-sys-color-primary);
+        }
+
+        /* Grid Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 32px;
+        }
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+        @media (min-width: 768px) {
+            .grid-2 { grid-template-columns: 1fr 1fr; }
+            .grid-3 { grid-template-columns: repeat(2, 1fr); }
+            .hero-section { padding-top: 64px; }
+        }
+        @media (min-width: 1024px) {
+            .grid-3 { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        /* Images */
+        .card-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: var(--md-sys-shape-corner-medium);
+            margin-bottom: 16px;
+        }
+        .profile-img-container {
+            width: 100%;
+            max-width: 400px;
+            aspect-ratio: 1;
+            border-radius: var(--md-sys-shape-corner-extra-large);
+            overflow: hidden;
+            margin: 0 auto;
+        }
+        .profile-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--md-sys-color-surface-container-high);
+            padding: 48px 0;
+            text-align: center;
+            color: var(--md-sys-color-on-surface-variant);
+        }
+
+        /* Toast / Snackbar */
+        .m3-snackbar {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background-color: var(--md-sys-color-on-surface);
+            color: var(--md-sys-color-surface);
+            padding: 14px 24px;
+            border-radius: var(--md-sys-shape-corner-extra-small);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 1000;
+            transition: transform 0.3s cubic-bezier(0.2, 0, 0, 1);
+            box-shadow: var(--md-sys-elevation-3);
+            opacity: 0;
+            pointer-events: none;
+        }
+        .m3-snackbar.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 64px;
+            left: 0;
+            width: 100%;
+            height: calc(100vh - 64px);
+            background-color: var(--md-sys-color-surface-container);
+            z-index: 99;
+            transform: translateY(-100%);
+            transition: transform 0.3s ease-in-out;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .mobile-menu-overlay.open {
+            transform: translateY(0);
+        }
+        @media (min-width: 768px) {
+            .mobile-menu-btn { display: none; }
+            .mobile-menu-overlay { display: none; }
+        }
+        @media (max-width: 767px) {
+            .desktop-nav { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- App Bar -->
+    <header class="m3-app-bar" id="app-bar">
+        <div class="m3-app-bar-title">Ranmaru<span style="color: var(--md-sys-color-primary);">.</span></div>
+        
+        <!-- Desktop Nav -->
+        <nav class="m3-app-bar-nav desktop-nav">
+            <a href="#about" class="m3-button m3-button-text">About</a>
+            <a href="#skills" class="m3-button m3-button-text">Skills</a>
+            <a href="#projects" class="m3-button m3-button-text">Projects</a>
+            <a href="#contact" class="m3-button m3-button-filled">Contact</a>
+        </nav>
+
+        <!-- Mobile Nav Button -->
+        <button class="m3-icon-button mobile-menu-btn" id="menu-btn" aria-label="Menu">
+            <span class="material-symbols-outlined">menu</span>
+        </button>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu-overlay" id="mobile-menu">
+        <a href="#about" class="m3-button m3-button-tonal" style="width: 100%; justify-content: flex-start;">About</a>
+        <a href="#skills" class="m3-button m3-button-tonal" style="width: 100%; justify-content: flex-start;">Skills</a>
+        <a href="#projects" class="m3-button m3-button-tonal" style="width: 100%; justify-content: flex-start;">Projects</a>
+        <a href="#contact" class="m3-button m3-button-filled" style="width: 100%; justify-content: flex-start;">Contact</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="hero-shape"></div>
+        <div class="container hero-content">
+            <h2 class="title-large" style="color: var(--md-sys-color-primary);">Hello, I'm</h2>
+            <h1 class="expressive-title">
+                Ranmaru <br>
+                <span>Student & Developer</span>
+            </h1>
+            <p class="body-large" style="max-width: 600px; color: var(--md-sys-color-on-surface-variant);">
+                アプリ開発、AIの実験、ハードウェアやOSをいじることが好きな学生であり、趣味開発者です。技術を探求し、「作って、壊して、理解して、より良くする」プロセスを楽しんでいます。
+            </p>
+            <div style="display: flex; gap: 16px; margin-top: 16px; flex-wrap: wrap;">
+                <a href="#projects" class="m3-button m3-button-filled">
+                    Projects
+                </a>
+                <a href="https://github.com/ranmaru1115" target="_blank" rel="noopener noreferrer" class="m3-button m3-button-outlined">
+                    GitHub Profile
+                </a>
+            </div>
+            
+            <div style="display: flex; gap: 16px; margin-top: 32px;">
+                <a href="https://github.com/ranmaru1115" target="_blank" rel="noopener noreferrer" class="m3-icon-button"><span class="material-symbols-outlined">code</span></a>
+                <a href="#contact" class="m3-icon-button"><span class="material-symbols-outlined">mail</span></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" style="background-color: var(--md-sys-color-surface);">
+        <div class="container">
+            <h2 class="display-medium" style="margin-bottom: 48px;">About Me</h2>
+            
+            <div class="grid-2">
+                <div class="profile-img-container">
+                    <!-- Placeholder using a solid color block to match Expressive shapes -->
+                    <div style="width: 100%; height: 100%; background: var(--md-sys-color-tertiary-container); display: flex; align-items: center; justify-content: center; border-radius: var(--md-sys-shape-corner-extra-large);">
+                        <span class="material-symbols-outlined" style="font-size: 120px; color: var(--md-sys-color-on-tertiary-container);">terminal</span>
+                    </div>
+                </div>
+                
+                <div class="m3-card m3-card-filled" style="justify-content: center;">
+                    <h3 class="headline-medium">Build it, break it, understand it, and build it better.</h3>
+                    <p class="body-large" style="color: var(--md-sys-color-on-surface-variant);">
+                        単にシステムを使うだけでなく、それが「どう動いているか」を理解することが好きです。<br><br>
+                        現在はWeb/Androidアプリ開発、ローカルLLM（Ollama等）を用いたAI技術の実験、Roblox等での鉄道システムの再現、そしてLinuxやWindowsでのホームサーバー構築など、幅広い分野に手を出しています。時には完璧に動き、時には動かない。それもひっくるめて開発を楽しんでいます！
+                    </p>
+                    
+                    <div style="margin-top: 16px; display: flex; flex-direction: column; gap: 8px;">
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <span class="material-symbols-outlined" style="color: var(--md-sys-color-primary);">school</span>
+                            <span class="body-medium">Student & Hobby Developer</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" style="background-color: var(--md-sys-color-surface-container-low);">
+        <div class="container">
+            <h2 class="display-medium" style="margin-bottom: 16px;">Skills</h2>
+            <p class="body-large" style="margin-bottom: 48px; color: var(--md-sys-color-on-surface-variant);">現在学習中、および開発で活用している技術スタックです。</p>
+            
+            <div class="grid-3">
+                <!-- Skill Card 1 -->
+                <div class="m3-card m3-card-elevated">
+                    <span class="material-symbols-outlined" style="font-size: 40px; color: var(--md-sys-color-primary);">code</span>
+                    <h3 class="title-large">Languages</h3>
+                    <p class="body-medium" style="color: var(--md-sys-color-on-surface-variant);">Webからアプリ、スクリプトまで用途に合わせて使い分けています。</p>
+                    <div class="m3-chip-group">
+                        <span class="m3-chip m3-chip-filled">TypeScript</span>
+                        <span class="m3-chip m3-chip-filled">JavaScript</span>
+                        <span class="m3-chip m3-chip-filled">Python</span>
+                        <span class="m3-chip m3-chip-filled">Dart</span>
+                        <span class="m3-chip">HTML/CSS</span>
+                        <span class="m3-chip">Lua</span>
+                    </div>
+                </div>
+
+                <!-- Skill Card 2 -->
+                <div class="m3-card m3-card-elevated">
+                    <span class="material-symbols-outlined" style="font-size: 40px; color: var(--md-sys-color-secondary);">developer_mode</span>
+                    <h3 class="title-large">Frameworks & Tools</h3>
+                    <p class="body-medium" style="color: var(--md-sys-color-on-surface-variant);">モダンなフロントエンドとクロスプラットフォーム開発。</p>
+                    <div class="m3-chip-group">
+                        <span class="m3-chip m3-chip-filled">React</span>
+                        <span class="m3-chip m3-chip-filled">Vite</span>
+                        <span class="m3-chip m3-chip-filled">Flutter</span>
+                        <span class="m3-chip">Node.js</span>
+                        <span class="m3-chip">Git/GitHub</span>
+                    </div>
+                </div>
+
+                <!-- Skill Card 3 -->
+                <div class="m3-card m3-card-elevated">
+                    <span class="material-symbols-outlined" style="font-size: 40px; color: var(--md-sys-color-tertiary);">smart_toy</span>
+                    <h3 class="title-large">AI & Platforms</h3>
+                    <p class="body-medium" style="color: var(--md-sys-color-on-surface-variant);">ローカルLLMや開発環境、セルフホスティングの運用。</p>
+                    <div class="m3-chip-group">
+                        <span class="m3-chip m3-chip-filled">Ollama</span>
+                        <span class="m3-chip m3-chip-filled">Linux</span>
+                        <span class="m3-chip m3-chip-filled">Windows</span>
+                        <span class="m3-chip">Copilot</span>
+                        <span class="m3-chip">Roblox</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" style="background-color: var(--md-sys-color-surface);">
+        <div class="container">
+            <h2 class="display-medium" style="margin-bottom: 48px;">Projects</h2>
+            
+            <div class="grid-3">
+                <!-- Project 1 -->
+                <div class="m3-card m3-card-outlined">
+                    <div style="background-color: var(--md-sys-color-primary-container); width: 100%; height: 180px; border-radius: var(--md-sys-shape-corner-medium); display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+                        <span class="material-symbols-outlined" style="font-size: 64px; color: var(--md-sys-color-on-primary-container);">download</span>
+                    </div>
+                    <h3 class="title-large">YTdlp-Modoki</h3>
+                    <p class="body-medium" style="color: var(--md-sys-color-on-surface-variant); flex-grow: 1;">YTdlpのラッパーツール。動画ダウンロードサイト特有の煩わしい広告やリダイレクトを避けるために自作しました。</p>
+                    <div style="display: flex; gap: 8px; width: 100%;">
+                        <a href="https://ytdlp-modoki-frontend.vercel.app/" target="_blank" rel="noopener noreferrer" class="m3-button m3-button-filled" style="flex: 1; padding: 0; min-width: 0;">今すぐ試す</a>
+                        <a href="https://github.com/ranmaru1115/Ytdlp-modoki" target="_blank" rel="noopener noreferrer" class="m3-button m3-button-tonal" style="flex: 1; padding: 0; min-width: 0;">GitHubを見る</a>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="m3-card m3-card-outlined">
+                    <div style="background-color: var(--md-sys-color-secondary-container); width: 100%; height: 180px; border-radius: var(--md-sys-shape-corner-medium); display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+                        <span class="material-symbols-outlined" style="font-size: 64px; color: var(--md-sys-color-on-secondary-container);">train</span>
+                    </div>
+                    <h3 class="title-large">Railway Projects</h3>
+                    <p class="body-medium" style="color: var(--md-sys-color-on-surface-variant); flex-grow: 1;">鉄道ナビ、ATO/TASCの概念、RobloxでのJR九州や福岡市地下鉄の再現など、鉄道関連システムの開発・シミュレーション。</p>
+                    <a class="m3-button m3-button-tonal" style="width: 100%; pointer-events: none; opacity: 0.5;">Coming Soon</a>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="m3-card m3-card-outlined">
+                    <div style="background-color: var(--md-sys-color-tertiary-container); width: 100%; height: 180px; border-radius: var(--md-sys-shape-corner-medium); display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+                        <span class="material-symbols-outlined" style="font-size: 64px; color: var(--md-sys-color-on-tertiary-container);">memory</span>
+                    </div>
+                    <h3 class="title-large">AI & Self-hosting</h3>
+                    <p class="body-medium" style="color: var(--md-sys-color-on-surface-variant); flex-grow: 1;">ローカルLLM（Ollama等）の展開や、Linuxサーバー・古いPCを活用したホームサーバー構築、AIエージェントの実験。</p>
+                    <a class="m3-button m3-button-tonal" style="width: 100%; pointer-events: none; opacity: 0.5;">Coming Soon</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" style="background-color: var(--md-sys-color-surface-container);">
+        <div class="container">
+            <div style="max-width: 600px; margin: 0 auto;">
+                <h2 class="display-medium" style="text-align: center; margin-bottom: 16px;">Get In Touch</h2>
+                <p class="body-large" style="text-align: center; margin-bottom: 40px; color: var(--md-sys-color-on-surface-variant);">お仕事のご依頼やご相談など、お気軽にお問い合わせください。</p>
+                
+                <div class="m3-card m3-card-filled">
+                    <form id="contact-form" onsubmit="event.preventDefault(); submitForm();">
+                        <div class="m3-text-field">
+                            <label for="name">お名前</label>
+                            <input type="text" id="name" class="m3-input" required placeholder="ゲスト 様">
+                        </div>
+                        
+                        <div class="m3-text-field">
+                            <label for="email">メールアドレス</label>
+                            <input type="email" id="email" class="m3-input" required placeholder="hello@example.com">
+                        </div>
+                        
+                        <div class="m3-text-field">
+                            <label for="message">メッセージ</label>
+                            <textarea id="message" class="m3-input" rows="4" required placeholder="こちらにメッセージをご記入ください..."></textarea>
+                        </div>
+                        
+                        <div style="display: flex; justify-content: flex-end; margin-top: 24px;">
+                            <button type="submit" class="m3-button m3-button-filled">
+                                <span class="material-symbols-outlined">send</span> 送信する
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <h3 class="title-large" style="margin-bottom: 16px;">Ranmaru.</h3>
+            <p class="body-medium">Built with Material 3 Expressive Design.</p>
+            <p class="body-medium" style="margin-top: 24px; opacity: 0.7;">&copy; 2026 Ranmaru. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Snackbar (Toast Notification) -->
+    <div id="snackbar" class="m3-snackbar">
+        <span class="material-symbols-outlined">mail</span>
+        <span class="body-medium">メールソフトを起動しました。</span>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // App Bar Scroll Effect
+        const appBar = document.getElementById('app-bar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                appBar.classList.add('scrolled');
+            } else {
+                appBar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = menuBtn.querySelector('.material-symbols-outlined');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('open');
+            if (mobileMenu.classList.contains('open')) {
+                menuIcon.textContent = 'close';
+            } else {
+                menuIcon.textContent = 'menu';
+            }
+        });
+
+        // Close mobile menu when clicking a link
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+                menuIcon.textContent = 'menu';
+            });
+        });
+
+        // Form Submit & Snackbar (Mailto)
+        function submitForm() {
+            const name = document.getElementById('name').value;
+            const emailInput = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            // mailtoリンクの構築
+            const email = 'ranmaru.honda1115@gmail.com';
+            const subject = encodeURIComponent(`[Portfolio] ${name}様よりお問い合わせ`);
+            const body = encodeURIComponent(`名前: ${name}\n返信用メールアドレス: ${emailInput}\n\n${message}`);
+            
+            // メールクライアントを起動
+            window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+            
+            const form = document.getElementById('contact-form');
+            const snackbar = document.getElementById('snackbar');
+            
+            // Reset form
+            form.reset();
+            
+            // Show snackbar
+            snackbar.classList.add('show');
+            
+            // Hide after 3 seconds
+            setTimeout(() => {
+                snackbar.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
