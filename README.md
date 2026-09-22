@@ -82,3 +82,5 @@ Sometimes it doesn't.
 **Thanks for visiting my profile!**
 
 there! 🛠️
+~~Seriously, I'm using AI all the time, but...~~
+
